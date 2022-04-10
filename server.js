@@ -11,7 +11,7 @@ app.use(express.json());
 
 
 function getTask() {
-    const tasksArray = fs.readFileSync(path.join(__dirname, './db/db.json'), 'utf-8');
+    const tasksArray = fs.readFileSync(path.join(__dirname, 'db/db.json'), 'utf-8');
     return JSON.parse(tasksArray)
 }
 
@@ -34,7 +34,7 @@ function createNewtasks(body) {
     const tasksArray = getTask();
     tasksArray.push(tasks);
     fs.writeFileSync(
-        path.join(__dirname, './db/db.json'),
+        path.join(__dirname, 'db/db.json'),
         JSON.stringify(tasksArray, null, 2)
     );
     return tasksArray;
@@ -43,12 +43,12 @@ function createNewtasks(body) {
 
 // http://localhost:3001/api/notes/
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+    res.sendFile(path.join(__dirname, 'public/notes.html'));
 });
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
+    res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.delete('/api/notes/:id', (req, res) => {
@@ -59,7 +59,7 @@ app.delete('/api/notes/:id', (req, res) => {
     {
         allNotes.splice(i,1);
         fs.writeFileSync(
-            path.join(__dirname, './db/db.json'),
+            path.join(__dirname, 'db/db.json'),
             JSON.stringify(allNotes, null, 2)
         )
     }
