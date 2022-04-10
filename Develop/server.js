@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.static('public'));
@@ -43,7 +43,6 @@ function createNewtasks(body) {
 
 // http://localhost:3001/api/notes/
 app.get('/notes', (req, res) => {
-    // console.log(path.join(__dirname, './public/notes.html'))
     res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
@@ -67,10 +66,6 @@ app.delete('/api/notes/:id', (req, res) => {
     }
     res.json(allNotes);
 });
-
-
-
-
 
 // http://localhost:3001/
 app.listen(PORT, () => {
